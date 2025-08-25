@@ -4,27 +4,54 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 public class App {
-    public static void main(String[] args) {
-        SessionFactory factory = new Configuration()
+    private static SessionFactory factory;
+
+    static {
+        factory = new Configuration()
                 .configure("config.xml")
                 .addAnnotatedClass(Book.class)
                 .buildSessionFactory();
+    }
 
+    public static void main(String[] args) {
+        try {
+            addBook("SQL");
+            addBook("Java");
 
+            List<String> books = getAllBookNames();
+            System.out.println("Books in DB: " + books);
+        } finally {
+            factory.close();
+        }
+    }
+
+    public static void addBook(String name) {
         Session session = factory.openSession();
-
-
         try {
             session.beginTransaction();
-            Book b1 = new Book();
-            b1.setBookName("SQL");
-            session.save(b1);
+            Book book = new Book();
+            book.setBookName(name);
+            session.save(book);
             session.getTransaction().commit();
-            System.out.println("Book saved successfully");
+            System.out.println("Book '" + name + "' saved successfully.");
         } finally {
             session.close();
-            factory.close();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<String> getAllBookNames() {
+        Session session = factory.openSession();
+        try {
+            session.beginTransaction();
+            List<String> books = session.createQuery("SELECT b.bookName FROM Book b").list();
+            session.getTransaction().commit();
+            return books;
+        } finally {
+            session.close();
         }
     }
 }
