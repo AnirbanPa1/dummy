@@ -18,8 +18,7 @@ public class App {
 
     public static void main(String[] args) {
         try {
-            addBook("SQL");
-            addBook("Java");
+            addBook("SQL", "some", "one", "someone@gmail.com");
 
             List<String> books = getAllBookNames();
             System.out.println("Books in DB: " + books);
@@ -28,12 +27,14 @@ public class App {
         }
     }
 
-    public static void addBook(String name) {
+    public static void addBook(String name, String a_firstName, String a_lastName, String email) {
         Session session = factory.openSession();
         try {
             session.beginTransaction();
             Book book = new Book();
             book.setBookName(name);
+            Author author = new Author(a_firstName, a_lastName, email);
+            book.setAuthor(author);
             session.save(book);
             session.getTransaction().commit();
             System.out.println("Book '" + name + "' saved successfully.");

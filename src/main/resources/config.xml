@@ -22,6 +22,7 @@
         <property name="hibernate.format_sql">true</property>
 
         <!-- Entity mappings go here -->
-        <!-- <mapping class="org.openarcadia.YourEntity"/> -->
+        <mapping class="org.openarcadia.Book"/>
+        <mapping class="org.openarcadia.Author"/>
     </session-factory>
 </hibernate-configuration>

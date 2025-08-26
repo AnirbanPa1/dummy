@@ -10,6 +10,17 @@ public class Book {
     @Column
     private String bookName;
 
+    @Embedded
+    private Author author;
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     public int getBookId() {
         return bookId;
     }
