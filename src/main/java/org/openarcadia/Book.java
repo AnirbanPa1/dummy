@@ -1,8 +1,14 @@
 package org.openarcadia;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "book_type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "IDK")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,27 +18,4 @@ public class Book {
 
     @Embedded
     private Author author;
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public int getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
 }
