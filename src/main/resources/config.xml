@@ -23,6 +23,7 @@
 
         <!-- Entity mappings go here -->
         <mapping class="org.openarcadia.Book"/>
+        <mapping class="org.openarcadia.PerBook" />
         <mapping class="org.openarcadia.Author"/>
         <mapping class="org.openarcadia.NonFictional" />
         <mapping class="org.openarcadia.Fictional" />

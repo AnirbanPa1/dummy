@@ -12,7 +12,7 @@ public class App {
     static {
         factory = new Configuration()
                 .configure("config.xml")
-                .addAnnotatedClass(Book.class)
+                .addAnnotatedClass(PerBook.class)
                 .addAnnotatedClass(Fictional.class)
                 .addAnnotatedClass(NonFictional.class)
                 .buildSessionFactory();
@@ -22,7 +22,7 @@ public class App {
         try {
             addBook("SQL", "some", "one", "someone@gmail.com");
             addFictionalBook("Silent Patient", "Alex", "Michelidis", "alex.michelidis@gmail.com", "Thriller, Suspense");
-            addFictionalBook("The Kite Runner", "Khaled", "Hosseini", "khaled.hosseini", "Slice of Life, Sad");
+            addFictionalBook("The Kite Runner", "Khaled", "Hosseini", "khaled.hosseini@gmail.com", "Slice of Life, Sad");
             addNonFictionalBook("Sapiens: A Brief History of Humankind", "Yuval", "N. Harari", "n.harari.yuval@gmail.com", "Science");
 
             List<String> books = getAllBookNames();
@@ -36,7 +36,7 @@ public class App {
         Session session = factory.openSession();
         try {
             session.beginTransaction();
-            Book book = new Book();
+            PerBook book = new PerBook();
             book.setBookName(name);
             Author author = new Author(a_firstName, a_lastName, email);
             book.setAuthor(author);

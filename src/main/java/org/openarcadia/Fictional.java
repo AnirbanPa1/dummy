@@ -5,9 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("FICTIONAL")
 @Data
-public class Fictional extends Book {
+public class Fictional extends PerBook {
     @Column
     private String genre;
 }

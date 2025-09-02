@@ -5,9 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue("NON_FICTIONAL")
 @Data
-public class NonFictional extends Book {
+public class NonFictional extends PerBook {
     @Column
     private String subject;
 }
